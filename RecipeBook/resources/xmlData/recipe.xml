@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <recipes>
+        <recipe id="1" cite="http://www.foodista.com/blog/2015/03/27/maple-bacon-scones">
+            <creationDate>01/14/2015</creationDate>
+            <name>Maple Bacon Scones </name>
+            <category>Breakfast</category>
+            <image></image>
+            <ingredientList>
+                <ingredient>15 slices thick-cut bacon </ingredient>
+                <ingredient>6 cups all-purpose flour</ingredient>
+                <ingredient>2 Tbsp baking powder </ingredient>
+                <ingredient>1½ tsp baking soda</ingredient>
+                <ingredient>¼ cup sugar </ingredient>
+                <ingredient>2¼ tsp kosher salt </ingredient>
+                <ingredient>2 cups cold unsalted butter, cut into ½ inch cubes </ingredient>
+                <ingredient>½ cup cold maple syrup</ingredient>
+                <ingredient>¾ cup cold buttermilk</ingredient>
+                <ingredient>2 egg yolks </ingredient>
+                <ingredient>Fleur de sel or Maldon sea salt </ingredient>
+                <ingredient>¾ cup extra maple syrup for glaze</ingredient>
+            </ingredientList>
+
+            <instruction>
+                <paragraph>
+                	Chop the bacon in 0.5 inch pieces and cook them in two batches in a frying pan over medium-high heat until crispy. Reserve 2 Tbsp of the bacon fat and let the bacon drip on paper towels. 
+                </paragraph>
+                <paragraph>
+                	In a very large bowl, combine the flour, baking powder, baking soda, sugar and salt and toss well. Throw in the cold butter and work it with your fingertips until the pieces are pea- and lima bean-size. Add the ½ cup maple syrup, buttermilk, bacon and reserved bacon fat. Lightly toss to distribute. 
+                </paragraph>
+                <paragraph>
+                	Immediately dump everything onto a clean surface with more than enough space to work the dough. Using only the heel of your palm quickly flatten out the dough. Gather the dough back together in a mound and repeat. After two or three repetitions, the dough should begin holding together. Be sure to avoid overworking. You should still see some pea-size bits of butter running through it. 
+                </paragraph>
+                <paragraph>
+			        Flatten the dough into a 1 inch thickness and cut out the scones with a glass or cookie cutter. Transfer them to an ungreased sheet pan. Very gently push the scraps back together and cut once more. Freeze for at least 2 hours before baking, or for up to 1 month, tightly wrapped. 
+		        </paragraph>
+		        <paragraph>
+			        Preheat your oven to 375 degrees F. Remove the scones from the freezer. Space them with plenty of breathing room on two ungreased sheet pans. Make the egg wash by mixing the egg yolks with the heavy cream and kosher salt and brush the scones with the egg wash and sprinkle with the fleur de sel. Bake from frozen, until cooked through and starting to brown, about 20 minutes. Pour 2 tsp maple syrup over each scone to glaze and bake 5 minutes longer. 
+		        </paragraph>
+            </instruction>
+        </recipe>
+        
+    </recipes>
+
+
+</data>
