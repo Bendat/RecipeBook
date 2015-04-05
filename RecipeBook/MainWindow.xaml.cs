@@ -153,8 +153,17 @@ namespace RecipeBook
 
         private void NewWindow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Editor editor = new Editor();
-            editor.Show();
+            RecipeEditor editor = new RecipeEditor();
+            Window window = new Window
+            {
+                Content = editor,
+                Height = 500,
+                Width = 760,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            window.ShowDialog();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -168,8 +177,17 @@ namespace RecipeBook
         //multiple recipes with the same id
         private void EditWindow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var editor = _currentId >= 0 ? new Editor(_currentId) : new Editor();
-            editor.Show();
+            var editor = _currentId >= 0 ? new RecipeEditor(_currentId) : new RecipeEditor();
+            Window window = new Window
+            {
+                Content = editor,
+                Height = 500,
+                Width = 760,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            window.ShowDialog();
         }
 
 
@@ -178,8 +196,8 @@ namespace RecipeBook
             Window window = new Window
             {
                 Content = new Settings(),
-                Height = 300,
-                Width = 500, AllowsTransparency = true,
+                Height = 390,
+                Width = 580, AllowsTransparency = true,
                 WindowStyle = WindowStyle.None,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };

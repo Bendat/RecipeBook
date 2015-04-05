@@ -1,43 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Xml;
 
 namespace RecipeBook
 {
     /// <summary>
-    /// Interaction logic for Editor.xaml
+    /// Interaction logic for RecipeEditor.xaml
     /// </summary>
-    public partial class Editor : Window
+    public partial class RecipeEditor : UserControl
     {
-        private readonly int RecipeID;
-        private readonly Boolean isEdit;
-        private string imageFileName;
-
-        public Editor()
+        private Window parent;
+        private readonly int _recipeId;
+        private readonly Boolean _isEdit;
+        private string _imageFileName;
+        public RecipeEditor()
         {
-            isEdit = false;
+            _isEdit = false;
             InitializeComponent();
         }
-        public Editor(int recipeId)
+        
+
+        public RecipeEditor(int recipeId)
         {
-            RecipeID = recipeId;
-            isEdit = true;
+            _recipeId = recipeId;
+            _isEdit = true;
             InitializeComponent();
             AddNodeToEditor();
         }
+
         private void TitleBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            WindowState = WindowState.Normal;
-            DragMove();
+            parent = Window.GetWindow(this);
+            parent.WindowState = WindowState.Normal;
+            parent.DragMove();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            parent = Window.GetWindow(this);
+            parent.Close();
         }
 
 
@@ -75,8 +86,8 @@ namespace RecipeBook
             bool? result = dlg.ShowDialog();
             if (result == true)
             {
-                imageFileName = dlg.FileName;
-                ImageDialog.Content = imageFileName;
+                _imageFileName = dlg.FileName;
+                ImageDialog.Content = _imageFileName;
             }
 
         }
@@ -84,7 +95,7 @@ namespace RecipeBook
         private Dictionary<String, Object> RetrieveData()
         {
             Dictionary<String, Object> items = new Dictionary<string, object>();
-            var textBoxes = this.UserFormGrid.Children.OfType<TextBox>();
+            var textBoxes = this.MainDataGrid.Children.OfType<TextBox>();
             var textBoxs = textBoxes as TextBox[] ?? textBoxes.ToArray();
 
             string recipeName = (from textBox in textBoxs
@@ -101,8 +112,8 @@ namespace RecipeBook
             category = FirstToUpperCase(category);
             string date = DateTime.Now.ToString("dd MMMM yyyy");
             string[] ingredients = (new TextRange(
-                            IngredientsInpuTextBox.Document.ContentStart,
-                            IngredientsInpuTextBox.Document.ContentEnd
+                            IngredientsInputTextBox.Document.ContentStart,
+                            IngredientsInputTextBox.Document.ContentEnd
                             )).Text.Split('\n');
 
             string[] instructions = (new TextRange(
@@ -111,7 +122,7 @@ namespace RecipeBook
                             )).Text.Split('\n');
 
             items.Add("name", recipeName);
-            items.Add("image", imageFileName);
+            items.Add("image", _imageFileName);
             items.Add("source", source);
             items.Add("category", category);
             items.Add("date", date);
@@ -121,7 +132,7 @@ namespace RecipeBook
         }
         private void AddNodeToEditor()
         {
-            XmlNode node = XmlEditor.FindbyId(RecipeID);
+            XmlNode node = XmlEditor.FindbyId(_recipeId);
             if (node == null)
             {
                 return;
@@ -142,7 +153,7 @@ namespace RecipeBook
                     para = para.Trim();
                     if (para != "")
                     {
-                        IngredientsInpuTextBox.Document.Blocks.Add(new Paragraph(new Run(para)));
+                        IngredientsInputTextBox.Document.Blocks.Add(new Paragraph(new Run(para)));
                     }
                 }
             }
@@ -161,17 +172,19 @@ namespace RecipeBook
         }
         private void OkButton_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            parent = Window.GetWindow(this);
             Dictionary<String, Object> data = RetrieveData();
             XmlEditor xmle = new XmlEditor(data);
-            var newNode = isEdit ? xmle.EditXmlNode(XmlLoader.FindbyId(RecipeID)) : xmle.MakeNode();
+            var newNode = _isEdit ? xmle.EditXmlNode(XmlLoader.FindbyId(_recipeId)) : xmle.MakeNode();
             xmle.WriteNodeToFile(newNode);
-            this.Close();
+            parent.Close();
             ((MainWindow)Application.Current.MainWindow).Run();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Close();
+            parent = Window.GetWindow(this);
+            parent.Close();
         }
         private string FirstToUpperCase(string text)
         {

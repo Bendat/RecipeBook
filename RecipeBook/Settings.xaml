@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Width="580" Height="390">
     <UserControl.BorderBrush>
         <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
             <GradientStop Color="Black" Offset="0.004"/>
@@ -18,10 +17,12 @@
         </TextBlock>
         <Label Content="Choose Theme:" HorizontalAlignment="Left" Margin="15,40,0,0" 
                VerticalAlignment="Top" Height="25" Width="115"/>
-        <Button Content="Exit" Margin="0,270,10,0" VerticalAlignment="Top" Click="Exit_Click" HorizontalAlignment="Right" Width="75"/>
-        <Button Content="Okay" Margin="0,270,100,0" VerticalAlignment="Top" Click="Save_Click" HorizontalAlignment="Right" Width="75"/>
-        <RadioButton Content="Honey" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <RadioButton Content="Water" HorizontalAlignment="Left" Margin="170,85,0,0" VerticalAlignment="Top"/>
+        <Button Content="Exit" Margin="0,0,10,10" Click="Exit_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button Content="Okay" Margin="0,0,95,10" Click="Save_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <RadioButton Content="Honey" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton Content="Water" HorizontalAlignment="Left" Margin="285,85,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="180" Margin="10,105,0,0" VerticalAlignment="Top" Width="265" Source="resources/screenshots/Honey.PNG"/>
+        <Image HorizontalAlignment="Left" Height="180" Margin="285,105,0,0" VerticalAlignment="Top" Width="265" Source="resources/screenshots/water.PNG"/>
 
     </Grid>
 </UserControl>
