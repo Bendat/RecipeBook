@@ -10,7 +10,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="recipes" minOccurs="0" maxOccurs="1">
+        <xs:element name="recipes" minOccurs="1" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
               <xs:element maxOccurs="unbounded" name="recipe">

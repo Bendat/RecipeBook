@@ -87,10 +87,12 @@
 
 
     <Grid>
-        <TextBlock MouseDown="TitleBar_OnMouseDown" 
-                   Margin="0,0,30,0" TextWrapping="Wrap" VerticalAlignment="Top"
-                   Height="30" FontSize="16" LineHeight="6" TextAlignment="Center" Background="DarkGoldenrod" Panel.ZIndex="9999999">
-                   <Run Language="en-ie" Text="Recipe Book"/></TextBlock>
+        <TextBlock MouseDown="TitleBar_OnMouseDown" Margin="0,0,30,0" 
+                   TextWrapping="Wrap" VerticalAlignment="Top"
+                   Height="30" FontSize="16" LineHeight="6" Panel.ZIndex="9999999"
+                   TextAlignment="Center" Background="DarkGoldenrod" >
+                   <Run Language="en-ie" Text="Recipe Book"/>
+        </TextBlock>
         <Button Name="ExitButton" Click="Button_Click" BorderThickness="0" BorderBrush="Black" 
                 Panel.ZIndex="99999999" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="30">
 

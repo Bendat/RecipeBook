@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
+
 /*  Copyright (C) 2015 Ben Aherne
 
     This program is free software: you can redistribute it and/or modify
@@ -31,14 +32,41 @@ namespace RecipeBook
         /// </summary>
         public static readonly XmlDocument Doc = new XmlDocument();
         protected static string Filename; 
+
         /// <summary>
         /// Loads an XML file into Doc.
         /// </summary>
-        /// <param name="location"></param>
+        /// <param name="location">The file name to an XmlDocument to load.</param>
         public static void LoadRecipeBook(String location)
         {
             Filename = location;
-            Doc.Load(location);
+            if (File.Exists(location))
+            {
+                Doc.Load(location);
+            } 
+            else
+            {
+                GenerateNewDocument(location);
+                Doc.Load(location);
+            }
         }
+        public static XmlNode FindbyId(int providedId)
+        {
+            var recipeNodeList = Doc.GetElementsByTagName("recipe");
+            return recipeNodeList.Cast<XmlNode>()
+                .Where(xmlNode => xmlNode.Attributes != null)
+                .FirstOrDefault(xmlNode => Convert.ToInt32(xmlNode.Attributes["id"].Value)
+                                           == providedId);
+        }
+
+        public static void GenerateNewDocument(string location)
+        {
+            const string str = @"<?xml version=""1.0""?><data></data>";
+            XDocument newDocument = XDocument.Parse(str);
+            XElement xElement = newDocument.Element("data");
+            if (xElement != null)
+                xElement.Add(new XElement("recipes", String.Empty));
+            newDocument.Save(location);        }
+
     }
 }

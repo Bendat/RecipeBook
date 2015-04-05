@@ -15,11 +15,6 @@ namespace RecipeBook
     {
         #region Public Methods
 
-        public static bool ActivateCenteredToMouse(this Window window)
-        {
-            ComputeTopLeft(ref window);
-            return window.Activate();
-        }
 
         public static void ShowCenteredToMouse(this Window window)
         {
@@ -302,48 +297,7 @@ namespace RecipeBook
             public readonly int bottom;
 
             /// <summary> Win32 </summary>
-            public static readonly Rect Empty;
-
-            /// <summary> Win32 </summary>
-            public int Width
-            {
-                get { return Math.Abs(right - left); } // Abs needed for BIDI OS
-            }
-
-            /// <summary> Win32 </summary>
-            public int Height
-            {
-                get { return bottom - top; }
-            }
-
-            /// <summary> Win32 </summary>
-            public Rect(int left, int top, int right, int bottom)
-            {
-                this.left = left;
-                this.top = top;
-                this.right = right;
-                this.bottom = bottom;
-            }
-
-
-            /// <summary> Win32 </summary>
-            public Rect(Rect rcSrc)
-            {
-                left = rcSrc.left;
-                top = rcSrc.top;
-                right = rcSrc.right;
-                bottom = rcSrc.bottom;
-            }
-
-            /// <summary> Win32 </summary>
-            public bool IsEmpty
-            {
-                get
-                {
-                    // BUGBUG : On Bidi OS (hebrew arabic) left > right
-                    return left >= right || top >= bottom;
-                }
-            }
+            private static readonly Rect Empty;
 
             /// <summary> Return a user friendly representation of this struct </summary>
             public override string ToString()
@@ -371,8 +325,6 @@ namespace RecipeBook
             {
                 return left.GetHashCode() + top.GetHashCode() + right.GetHashCode() + bottom.GetHashCode();
             }
-
-
             /// <summary> Determine if 2 Rect are equal (deep compare)</summary>
             public static bool operator ==(Rect rect1, Rect rect2)
             {

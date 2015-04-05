@@ -36,19 +36,19 @@ namespace RecipeBook
         private const int PromptFontSize = 20;
         private const string PromptFont = "Segoe UI";
         private const string TextFont = "Segoe UI";
+        private const int TextFontSize = 20;
         private readonly FontWeight _titleFontWeight = FontWeights.SemiBold;
         private readonly FontStyle _titleFontStyle = default(FontStyle);
-        private readonly Brush _titleBrush = Brushes.DarkGoldenrod;
+        private readonly Brush _titleBrush = Theme.HeaderColor;
         private readonly FontWeight _dateFontWeight = FontWeights.SemiBold;
         private readonly FontStyle _dateFontStyle = default(FontStyle);
-        private readonly Brush _dateBrush = Brushes.DarkGoldenrod;
-        private readonly Brush _textBrush = Brushes.Cornsilk;
+        private readonly Brush _dateBrush = Theme.HeaderColor;
+        private readonly Brush _textBrush = Theme.MainTextColor;
         private readonly FontWeight _promptFontWeight = FontWeights.Light;
         private readonly FontStyle _promptFontStyle = FontStyles.Italic;
-        private readonly Brush _promptBrush = Brushes.Cornsilk;
+        private readonly Brush _promptBrush = Theme.MainTextColor;
         private readonly FontWeight _textFontWeight = FontWeights.Normal;
         private readonly FontStyle _textFontStyle = default(FontStyle);
-        private const int TextFontSize = 20;
 #endregion
 
         /// <summary>
@@ -89,6 +89,36 @@ namespace RecipeBook
             if (isSeparated)
             {
                 box.Document.Blocks.Add(SeperatorLine());
+            }
+        }
+        /// <summary>
+        /// Adds a formatted string to a TextBlock.
+        /// </summary>
+        /// <param name="block">The TextBlock to add content to</param>
+        /// <param name="content">The string to add.</param>
+        /// <param name="section">Which formatting to use</param>
+        /// <param name="isSeparated">Optionally adds a dotted line the length of the textblock.</param>
+        public void AddPrompt(TextBlock block, string content, DocumentSection section, bool isSeparated = false)
+        {
+            block.Text = null;
+            Run text = new Run(content)
+            {
+                FontSize = GetDataForDocumentSection(section, TextSection.Size),
+                Foreground = GetDataForDocumentSection(section, TextSection.Brush),
+                FontStyle = GetDataForDocumentSection(section, TextSection.Style),
+                FontFamily = new FontFamily(GetDataForDocumentSection(section, TextSection.TypeFace)),
+                FontWeight = GetDataForDocumentSection(section, TextSection.Weight),
+            };
+            block.Inlines.Add(text);
+            if (isSeparated)
+            {
+                block.Inlines.Add(new Line()
+                {
+                    Stretch = Stretch.Fill,
+                    Stroke = Brushes.Silver,
+                    X2 = 1,
+                    StrokeDashArray = { 2, 2 },
+                });
             }
         }
         /// <summary>

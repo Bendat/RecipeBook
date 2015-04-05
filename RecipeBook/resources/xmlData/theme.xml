@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<themes active="honey">
+    <theme name="honey">
+        <background color="#b8860b" />
+        <uiText color="#FFF8DC" />
+        <header color="#b8860b" />
+        <selection color="#DAA520" />
+        <textHover color="#DAA520" />
+        <mainText color="#FFF8DC" />
+    </theme>
+    <theme name="water">
+        <background color="#659CEF" />
+        <uiText color="#ffffff" />
+        <header color="#659CEF" />
+        <selection color="#659CEF" />
+        <textHover color="#659CEF" />
+        <mainText color="#ffffff" />
+    </theme>
+    
+</themes>

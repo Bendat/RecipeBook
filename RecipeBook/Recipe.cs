@@ -70,72 +70,49 @@ namespace RecipeBook {
         //Converts an XmlNode object into a Recipe object.
         private void CreateRecipe(XmlNode node)
         {
-            if (node.Attributes != null)
+            if (node.Attributes == null) return;
+            if (node.Attributes["id"] != null)
             {
-                if (node.Attributes != null)
+                Id = Convert.ToInt32(node.Attributes["id"].Value);
+                if (node.Attributes["cite"] != null)
                 {
-                    Id = Convert.ToInt32(node.Attributes["id"].Value);
-                    if (node.Attributes["cite"] != null)
-                    {
-                        Source = node.Attributes["cite"].Value;
-                    }
+                    Source = node.Attributes["cite"].Value;
                 }
+            }
 
-                if (node["creationDate"] != null)
-                {
-                    CreationDate = node["creationDate"].InnerText;
-                }
-                else
-                {
-                    CreationDate = "No creation date found";
-                }
-                if (node["name"] != null)
-                {
-                    RecipeName = node["name"].InnerText;
-                }
-                else
-                {
-                    RecipeName = "No Name Found";
-                }
-                if (node["category"] != null)
-                {
-                    Category = node["category"].InnerText;
-                }
-                else
-                {
-                    Category = "No Category Found";
-                }
-                if (node["image"] != null)
-                {
-                    ImageLocation = node["image"].InnerText;
-                }
-                else
-                {
-                    ImageLocation = " ";
-                }
+            CreationDate = node["creationDate"] != null 
+                ? node["creationDate"].InnerText : "No creation date found";
 
-                if (node["ingredientList"] != null)
+            RecipeName = node["name"] != null 
+                ? node["name"].InnerText : "No Name Found";
+
+            Category = node["category"] != null 
+                ? node["category"].InnerText : "No Category Found";
+
+            ImageLocation = node["image"] != null 
+                ? node["image"].InnerText : " ";
+
+            if (node["ingredientList"] != null)
+            {
+                foreach (XmlNode subnode in node["ingredientList"])
                 {
-                    foreach (XmlNode subnode in node["ingredientList"])
-                    {
-                        Ingredients.Add(subnode.InnerXml);
-                    }
+                    Ingredients.Add(subnode.InnerXml);
                 }
-                else
+            }
+            else
+            {
+                Ingredients.Add("No ingredients found");
+            }
+            if (node["instruction"] != null)
+            {
+                foreach (XmlNode subnode in node["instruction"])
                 {
-                    Ingredients.Add("No ingredients found");
+                    Instructions.Add(subnode.InnerXml);
                 }
-                if (node["instruction"] != null)
-                {
-                    foreach (XmlNode subnode in node["instruction"])
-                    {
-                        Instructions.Add(subnode.InnerXml);
-                    }
-                }
-                else
-                {
-                    Instructions.Add("No instructions found");
-                }
+            }
+            else
+            {
+                Instructions.Add("No instructions found");
             }
         }
     }

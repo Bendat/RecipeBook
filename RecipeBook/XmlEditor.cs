@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Annotations;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
+
 /*  Copyright (C) 2015 Ben Aherne
 
     This program is free software: you can redistribute it and/or modify
@@ -18,41 +21,37 @@ using System.Xml;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+
 namespace RecipeBook
 {
     /// <summary>
-    /// XmlEditor is the class responsible for manipulating 
+    ///     XmlEditor is the class responsible for manipulating
     /// </summary>
-    class XmlEditor : XmlLoader
+    internal class XmlEditor : XmlLoader
     {
+        private readonly XmlElement _category = Doc.CreateElement("category");
+        private readonly XmlElement _date = Doc.CreateElement("creationDate");
+        private readonly XmlElement _ingredients = Doc.CreateElement("ingredientList");
+        private readonly XmlElement _instructions = Doc.CreateElement("instruction");
+        private readonly XmlElement _name = Doc.CreateElement("name");
+        private readonly Dictionary<String, object> _recipeDictionary;
+        private XmlElement _image = Doc.CreateElement("image");
+
         public XmlEditor(Dictionary<String, object> dict)
         {
             _recipeDictionary = dict;
-            _id = FindHighestId();
         }
-        private readonly Dictionary<String, object> _recipeDictionary;
-        private int _id;
-        private readonly XmlElement _date = Doc.CreateElement("creationDate");
-        private readonly XmlElement _name = Doc.CreateElement("name");
-        private readonly XmlElement _category = Doc.CreateElement("category");
-        private XmlElement _image = Doc.CreateElement("image");
-        private readonly XmlElement _ingredients = Doc.CreateElement("ingredientList");
-        private readonly XmlElement _instructions = Doc.CreateElement("instruction");
-        public static XmlNode FindbyId(int providedId)
-        {
-            XmlNodeList recipeNodeList = Doc.GetElementsByTagName("recipe");
-            return recipeNodeList.Cast<XmlNode>()
-                  .Where(xmlNode => xmlNode.Attributes != null)
-                  .FirstOrDefault(xmlNode => Convert.ToInt32(xmlNode.Attributes["id"].Value)
-                   == providedId);
-        }
+        /// <summary>
+        /// Saves the provided XmlNode to the Xml file stored in the XmlLoader class.
+        /// </summary>
+        /// <param name="node">The XmlNode to save to the file.</param>
         public void WriteNodeToFile(XmlNode node)
         {
-            XmlNode recipesNode = Doc.LastChild.LastChild;
-            if (node.Attributes != null)
+            var recipesNode = Doc.LastChild.LastChild;
+            if (node.Attributes != null && node.Attributes["id"] != null)
             {
-                int id = Convert.ToInt32(node.Attributes["id"].Value);
-                XmlNode xnode = FindbyId(id);
+                var id = Convert.ToInt32(node.Attributes["id"].Value);
+                var xnode = FindbyId(id);
                 if (xnode != null)
                 {
                     Doc.LastChild.LastChild.RemoveChild(xnode);
@@ -61,53 +60,85 @@ namespace RecipeBook
             recipesNode.AppendChild(node);
             Doc.Save(Filename);
         }
-        public XmlNode MakeNode(bool isEdit = false)
+        /// <summary>
+        /// Creates a new node with the data provided to the XmlEditor instance.
+        /// </summary>
+        /// <returns>An XmlNode in the Recipe format.</returns>
+        public XmlNode MakeNode()
         {
+            int id = FindHighestId() + 1;
             XmlNode rcp = Doc.CreateElement("recipe");
-            XmlAttribute idAtt = Doc.CreateAttribute("id");
-            idAtt.Value = isEdit ? _id.ToString() : _id++.ToString();
-            rcp.Attributes.Append(idAtt);
-            if (!_recipeDictionary["source"].Equals("source"))
+            var idAtt = Doc.CreateAttribute("id");
+            idAtt.Value = id.ToString();
+            if (rcp.Attributes != null)
             {
-                XmlAttribute source = Doc.CreateAttribute("cite");
-                source.Value = _recipeDictionary["source"].ToString();
-                rcp.Attributes.Append(source);
+                rcp.Attributes.Append(idAtt);
+                if (!_recipeDictionary["source"].Equals("source"))
+                {
+                    var source = Doc.CreateAttribute("cite");
+                    source.Value = _recipeDictionary["source"].ToString();
+                    rcp.Attributes.Append(source);
+                }
             }
+            AddFieldsToNode(rcp);
+            return rcp;
+        }
+        /// <summary>
+        /// Edits an existing XmlNode in XmlLoaders stored file.
+        /// </summary>
+        /// <param name="node">The existing node to edit</param>
+        /// <returns>A reference to the edited node.</returns>
+        public XmlNode EditXmlNode(XmlNode node)
+        {
+            if (node == null || node.Attributes["id"] == null)
+            {
+                return MakeNode();
+            }
+            XmlAttribute idAtt = node.Attributes["id"];
+            node.RemoveAll();
+            node.Attributes.Append(idAtt);
+            Console.WriteLine(node.Attributes["id"]);
+            AddFieldsToNode(node);
+            return node;
+        }
+        //Adds all the fields from this object to a new XmlNode
+        //Or overwrites the contents of an existing node.
+        private void AddFieldsToNode(XmlNode node)
+        {
+            var ingrList = (IEnumerable<string>)_recipeDictionary["ingr"];
+            var methodList = (IEnumerable<string>)_recipeDictionary["instr"];
             _date.InnerText = _recipeDictionary["date"].ToString();
             _name.InnerText = _recipeDictionary["name"].ToString();
             _category.InnerText = _recipeDictionary["category"].ToString();
             //image.InnerText = recipeDictionary["image"].ToString();
-            rcp.AppendChild(_date);
-            rcp.AppendChild(_name);
-            rcp.AppendChild(_category);
+            node.AppendChild(_date);
+            node.AppendChild(_name);
+            node.AppendChild(_category);
             // rcp.AppendChild(image);
-            var ingrList = (IEnumerable<string>) _recipeDictionary["ingr"];
             NodeFromArray(_ingredients, ingrList, "ingredient");
-            rcp.AppendChild(_ingredients);
-            var methodList = (IEnumerable<string>) _recipeDictionary["instr"];
+            node.AppendChild(_ingredients);
             NodeFromArray(_instructions, methodList, "paragraph");
-            rcp.AppendChild(_instructions);
-            return rcp;
+            node.AppendChild(_instructions);
         }
-
         private void NodeFromArray(XmlNode parent, IEnumerable<string> list, string elementName)
         {
-            foreach (string instr in list)
+            foreach (var instr in list)
             {
-                string para = Regex.Replace(instr, @"^\s+$[\r\n]*", "", RegexOptions.Multiline);
+                var para = instr;
                 para = para.Trim();
-                XmlElement item = Doc.CreateElement(elementName);
+                var item = Doc.CreateElement(elementName);
                 item.InnerText = para;
                 parent.AppendChild(item);
             }
         }
         private int FindHighestId()
         {
-            XmlNodeList recipeNodeList = Doc.GetElementsByTagName("recipe");
-            return (from XmlNode node in recipeNodeList
-                    where node.Attributes != null
-                    select Convert
-                   .ToInt32(node.Attributes["id"].Value)).Concat(new[] { 0 }).Max();
+            var recipeNodeList = Doc.GetElementsByTagName("recipe");
+            if (recipeNodeList.Count == 0) return 0;
+            var xdoc = XDocument.Load("xmlData/recipe.xml");
+            int maxId = xdoc.Descendants("recipe")
+                        .Max(x => (int)x.Attribute("id"));
+            return maxId;
         }
     }
 }

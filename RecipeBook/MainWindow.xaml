@@ -1,11 +1,12 @@
 ﻿<Window x:Class="RecipeBook.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:recipeBook="clr-namespace:RecipeBook"
         Title="Recipe Book" Height="768" Width="1024"
         WindowStartupLocation="CenterScreen"
         BorderThickness="1" WindowStyle="None" Visibility="Visible" 
-        AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Foreground="White"
-        Name="PrimaryWindow" BorderBrush="DarkGoldenrod"
+        AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Foreground="Cornsilk"
+        Name="PrimaryWindow" BorderBrush="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}}"
         >
     <Window.Resources>
         <Style x:Key="ContainerStyle" TargetType="{x:Type GroupItem}">
@@ -16,10 +17,10 @@
                             <Expander.Header>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" 
-                                               Foreground="DarkGoldenrod" FontSize="22" 
+                                               Foreground="{Binding Source={x:Static recipeBook:Theme.HeaderColor}}" FontSize="22" 
                                                VerticalAlignment="Bottom" />
                                     <TextBlock Text="{Binding ItemCount}" FontSize="16" 
-                                               Foreground="FloralWhite" Margin="10,0,0,0" 
+                                               Foreground="{x:Static recipeBook:Theme.MainTextColor}" Margin="10,0,0,0" 
                                                VerticalAlignment="Bottom" />
                                 </StackPanel>
                             </Expander.Header>
@@ -29,15 +30,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="MouseOverColor" Color="Goldenrod" />
-        <SolidColorBrush x:Key="MouseNotOverColor" Color="White" />
         <Style TargetType="Label" x:Key="MouseOverStyle">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="{StaticResource MouseOverColor}"/>
+                    <Setter Property="Foreground" Value="{x:Static recipeBook:Theme.TextHoverColor}"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Foreground" Value="{StaticResource MouseNotOverColor}"/>
+                    <Setter Property="Foreground" Value="{x:Static recipeBook:Theme.UiTextColor}"/>
                 </Trigger>
 
             </Style.Triggers>
@@ -45,9 +44,7 @@
         <ImageSource x:Key="Exit">resources/icons/exit.png</ImageSource>
         <ImageSource x:Key="Exittrans">resources/icons/exittransparent.png</ImageSource>
         <ImageSource x:Key="Max">resources/icons/maximise.png</ImageSource>
-        <ImageSource x:Key="Maxblue">resources/icons/maximisegold.png</ImageSource>
         <ImageSource x:Key="Min">resources/icons/minimise.png</ImageSource>
-        <ImageSource x:Key="Minblue">resources/icons/minimisegold.png</ImageSource>
         <ImageSource x:Key="Home">resources/icons/home.png</ImageSource>
         <ImageSource x:Key="Homewhite">resources/icons/homewhite.png</ImageSource>
     </Window.Resources>
@@ -61,12 +58,15 @@
                    Height="28" Stroke="#A5FFFFFF" VerticalAlignment="Top" StrokeThickness="0" Margin="0,30,0,0"/>
         <TextBlock MouseDown="TitleBar_OnMouseDown" 
                    Margin="0,0,90,0" TextWrapping="Wrap" VerticalAlignment="Top"
-                   Height="30" FontSize="16" LineHeight="6" TextAlignment="Center" Background="DarkGoldenrod">
+                   Height="30" FontSize="16" LineHeight="6" TextAlignment="Center" 
+                   Background="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}}">
+            
                    <Run Language="en-ie" Text="Recipe Book"/></TextBlock>
         <ListView Name="RecipeList" 
                   Grid.Row="0" Grid.Column="0" Width="166" Margin="0,30,0,0" 
                   HorizontalAlignment="Left" Background="#003E3E3E" BorderThickness="0,0,1,0" 
-                  BorderBrush="DarkGoldenrod" Foreground="Black" TabIndex="2">
+                  BorderBrush="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}}" 
+                  Foreground="Black" TabIndex="2">
 
             <ListView.ItemContainerStyle >
                 <Style TargetType="{x:Type ListViewItem}">
@@ -81,15 +81,13 @@
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <TextBlock FontSize="14" TextAlignment="Center" Padding="3" Margin="0" 
-                               Text="{Binding RecipeName}" Foreground="White"
+                               Text="{Binding RecipeName}" Foreground="{x:Static recipeBook:Theme.UiTextColor}"
                     />
                 </DataTemplate>
             </ListView.ItemTemplate>
 
 
         </ListView>
-
-
         <Button Name="ExitButton" Click="Button_Click" BorderThickness="0" BorderBrush="Black" 
                 Panel.ZIndex="99999999" Height="30" VerticalAlignment="Top" 
                 HorizontalAlignment="Right" Width="30">
@@ -145,23 +143,19 @@
         <Button Name="Maximise" PreviewMouseLeftButtonUp="Maximise_OnMouseLeftButtonUp" 
                 Margin="0,0,30,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" 
                 Width="30">
-            <Button.Background>
-                <ImageBrush ImageSource="resources/icons/exittransparent.png" Stretch="Uniform" 
-                            TileMode="Tile">
-                </ImageBrush>
-            </Button.Background>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <StackPanel>
                         <Image Name="image1"
-                               Source="{StaticResource Maxblue}"
-                               Stretch="None"
-                               Visibility="Collapsed" 
-                        />
+                            Source="{StaticResource Max}"
+                            Stretch="None"
+                            Visibility="Collapsed"
+                            Opacity="1"
+                         />
                         <Image Name="image2"
-                               Source="{StaticResource Max}"
-                               Stretch="None" 
-                               Visibility="Visible" 
+                            Source="{StaticResource Max}"
+                            Stretch="None" Visibility="Visible" 
+                            Opacity=".8"
                          />
                     </StackPanel>
                     <ControlTemplate.Triggers>
@@ -179,32 +173,19 @@
         </Button>
         <Button Name="Minimise" PreviewMouseLeftButtonUp="Minimise_OnMouseLeftButtonUp" 
                 Margin="0,0,60,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right"
-                Width="30">
-            <Button.Background>
-                <ImageBrush ImageSource="resources/icons/exittransparent.png" Stretch="UniformToFill"
-                            TileMode="Tile">
-                    <ImageBrush.RelativeTransform>
-                        <TransformGroup>
-                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </ImageBrush.RelativeTransform>
-                </ImageBrush>
-            </Button.Background>
+                Width="30" RenderTransformOrigin="0.267,0.4">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <StackPanel>
                         <Image Name="image1"
-                            Source="{StaticResource Minblue}"
-                            Stretch="None"
-                            Visibility="Collapsed"
+                            Source="{StaticResource Min}"
+                            Stretch="None" Visibility="Collapsed"
+                            Opacity="1"
                          />
                         <Image Name="image2"
                             Source="{StaticResource Min}"
-                            Stretch="None"
-                            Visibility="Visible" 
+                            Stretch="None" Visibility="Visible" 
+                            Opacity=".8"
                          />
                     </StackPanel>
                     <ControlTemplate.Triggers>
@@ -252,20 +233,23 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label Content="Settings" Margin="0,30,35,0" VerticalAlignment="Top" 
+        <Label Name="SettingsLabel" Content="Settings" Margin="0,30,35,0" VerticalAlignment="Top" 
+               MouseLeftButtonUp="SettingsLabel_OnMouseLeftButtonUp"
                IsManipulationEnabled="true" FontSize="16" HorizontalAlignment="Right" 
-               Width="86" Style="{StaticResource MouseOverStyle}" TabIndex="3" Cursor="Hand"
+               Width="86" Style="{StaticResource MouseOverStyle}" TabIndex="3" Cursor="Hand" Height="33"
         />
         <Image Height="140" Margin="0,68,0,0" VerticalAlignment="Top" 
                Source="cookbookicon2.ico" Stretch="UniformToFill" 
                HorizontalAlignment="Right" Width="156"/>
         <RichTextBox IsReadOnly="True" Name="IngredientsText" HorizontalAlignment="Left" 
                      Margin="166,180,0,0" Width="206" Background="#003E3E3E" 
+                     SelectionBrush="{Binding Source={x:Static recipeBook:Theme.SelectionColor}}"
                      BorderBrush="#A53E3E3E" BorderThickness="0"
-                     Foreground="FloralWhite"
+                     Foreground="{x:Static recipeBook:Theme.UiTextColor}"
                      />
         <RichTextBox IsReadOnly="True" Name="BodyText"  Margin="372,180,156,0" 
-                     Foreground="FloralWhite" BorderBrush="#A53E3E3E" SelectionBrush="#FF3399FF"
+                     Foreground="Cornsilk" BorderBrush="#A53E3E3E" 
+                     SelectionBrush="{Binding Source={x:Static recipeBook:Theme.SelectionColor}}"
                      VerticalScrollBarVisibility="Auto" BorderThickness="0" Background="#003E3E3E"
                      />
 
@@ -273,7 +257,7 @@
                    Canvas.Top="162" Width="117" Margin="0,235,10,0"
                    HorizontalAlignment="Right" Height="90" VerticalAlignment="Top">
             <Hyperlink Name="HyperLabel" RequestNavigate="Hyperlink_RequestNavigate" 
-                       Foreground="White">
+                       Foreground="{x:Static recipeBook:Theme.UiTextColor}">
                 
             </Hyperlink>
         </TextBlock>
@@ -287,19 +271,20 @@
         	   FontSize="16" Style="{StaticResource MouseOverStyle}" TabIndex="3" Height="28"
                HorizontalAlignment="Left" Width="60" Cursor="Hand"
         />
-        <RichTextBox IsReadOnly="True" x:Name="IngredientsPrompt" HorizontalAlignment="Left" 
+        <TextBlock   x:Name="IngredientsPrompt" HorizontalAlignment="Left" 
         	         Margin="166,125,0,0" Width="201" Background="#003E3E3E" 
-        	         BorderBrush="#A53E3E3E" BorderThickness="0"
-        	         Foreground="FloralWhite" Height="55" VerticalAlignment="Top"
+        	         Foreground="{x:Static recipeBook:Theme.MainTextColor}" Height="55" VerticalAlignment="Top"
                      />
         <RichTextBox IsReadOnly="True" x:Name="TitleBox" 
-        	         Margin="372,30,156,0" Background="#003E3E3E" 
+        	         Margin="372,30,156,0" Background="#003E3E3E"
+                     SelectionBrush="{Binding Source={x:Static recipeBook:Theme.SelectionColor}}"
         	         BorderBrush="#A53E3E3E" BorderThickness="0"
-        	         Foreground="FloralWhite" Height="95" VerticalAlignment="Top"
+        	         Foreground="{x:Static recipeBook:Theme.MainTextColor}" Height="95" VerticalAlignment="Top"
                      />
-        <RichTextBox IsReadOnly="True" x:Name="InstructionsPrompt" Margin="372,125,156,0" Background="#003E3E3E" 
-        	         BorderBrush="#A53E3E3E" BorderThickness="0"
-        	         Foreground="FloralWhite" Height="55" VerticalAlignment="Top"
+        <TextBlock  x:Name="InstructionsPrompt" 
+                    Margin="372,125,156,0" Background="#003E3E3E" 
+        	        Foreground="{x:Static recipeBook:Theme.MainTextColor}" 
+                    Height="55" VerticalAlignment="Top"
                      />
     </Grid>
 </Window>

@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,11 +30,9 @@
     <PublisherName>Ben Aherne</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,6 +52,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>cookbookicon2.ico</ApplicationIcon>
@@ -75,6 +76,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +97,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -103,7 +106,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -112,8 +115,9 @@
   <PropertyGroup>
     <StartupObject>RecipeBook.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -135,6 +139,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Theme.cs" />
+    <Compile Include="ThemeReader.cs" />
+    <Compile Include="WindowExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="XmlEditor.cs" />
     <Compile Include="XmlLoader.cs" />
     <Page Include="Editor.xaml">
@@ -154,12 +166,15 @@
     </Compile>
     <Compile Include="NoSectionTypeException.cs" />
     <Compile Include="RecipeFormatter.cs" />
-    <Compile Include="WindowExtensions.cs" />
     <Compile Include="Recipe.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -188,7 +203,6 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="resources\icons\exittransparent.pdn" />
-    <None Include="resources\icons\minimiseblue.pdn" />
     <None Include="resources\icons\minimisegold.pdn" />
     <None Include="resources\icons\Thumbs.db" />
     <None Include="resources\WelcomeScreen\welcome.rtf" />
@@ -210,39 +224,16 @@
     <Resource Include="resources\images\placeholder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\icons\exitalt.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\icons\exit.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\icons\exittransparent.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\icons\blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\bluebig.png" />
-    <Resource Include="resources\icons\exitbig.png" />
-    <Resource Include="resources\icons\exittransparentbig.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\icons\maximise.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\icons\maximiseblue.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\icons\minimise.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\minimiseblue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\maximisegreen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\minimisegreen.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\icons\home.png" />
@@ -253,15 +244,6 @@
   <ItemGroup>
     <Folder Include="resources\images\userimages\" />
     <Folder Include="resources\stylesheet\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\maximisegold.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\icons\minimisegold.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -287,6 +269,9 @@
       <Progid>Recipe Book</Progid>
       <DefaultIcon>cookbookicon2.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\xmlData\theme.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

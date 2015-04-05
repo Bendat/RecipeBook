@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -38,17 +36,20 @@ namespace RecipeBook
         /// <summary>
         /// A collection of Recipe objects.
         /// </summary>
-        public ObservableCollection<Recipe> Recipes { get; internal set; }
+        private ObservableCollection<Recipe> Recipes { get; set; }
         private const string WelcomeFile = "WelcomeScreen/welcome.rtf";
         private FileStream _fs;
         private int _currentId;
+
         public MainWindow()
         {
+            Theme.SetTheme();
             InitializeComponent();
             Run();
         }
+
         /// <summary>
-        /// Default method to load the program into the window.
+        /// Program entry point.
         /// </summary>
         public void Run()
         {
@@ -63,14 +64,15 @@ namespace RecipeBook
             view.SortDescriptions.Add(new SortDescription("RecipeName", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("id", ListSortDirection.Ascending));
             RecipeList.ItemsSource = view;
+            
         }
         //Sets up the welcome screen. Clears all other text fields.
         private void LoadRichTextBox()
         {
             BodyText.Document.Blocks.Clear();
             IngredientsText.Document.Blocks.Clear();
-            IngredientsPrompt.Document.Blocks.Clear();
-            InstructionsPrompt.Document.Blocks.Clear();
+            IngredientsPrompt.Text = null;
+            InstructionsPrompt.Text = null;
             TitleBox.Document.Blocks.Clear();
             var tr = new TextRange(BodyText.Document.ContentStart, BodyText.Document.ContentEnd);
             using (_fs = new FileStream(WelcomeFile, FileMode.OpenOrCreate))
@@ -109,9 +111,9 @@ namespace RecipeBook
                 Console.WriteLine(loadedRecipe.Id);
                 RecipeFormatter rf = new RecipeFormatter();
                 rf.AddContent(TitleBox, loadedRecipe.RecipeName, DocumentSection.Title);
-                rf.AddContent(InstructionsPrompt, " method", DocumentSection.Prompt, true);
+                rf.AddPrompt(InstructionsPrompt, " method", DocumentSection.Prompt, true);
                 rf.AddContent(BodyText, loadedRecipe.Instructions, DocumentSection.Text);
-                rf.AddContent(IngredientsPrompt, "Ingredients", DocumentSection.Prompt);
+                rf.AddPrompt(IngredientsPrompt, "Ingredients", DocumentSection.Prompt);
                 rf.AddContent(IngredientsText, loadedRecipe.Ingredients, DocumentSection.Text, .8);
                 if (!string.IsNullOrEmpty(loadedRecipe.Source))
                 {
@@ -166,12 +168,24 @@ namespace RecipeBook
         //multiple recipes with the same id
         private void EditWindow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var editor = _currentId >= 0 ? 
-                new Editor(_currentId) : new Editor();
+            var editor = _currentId >= 0 ? new Editor(_currentId) : new Editor();
             editor.Show();
         }
-#endregion
+
+
+        private void SettingsLabel_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Window window = new Window
+            {
+                Content = new Settings(),
+                Height = 300,
+                Width = 500, AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            window.ShowDialog();
+        }
     }
-    
+#endregion    
     
 }
