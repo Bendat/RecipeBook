@@ -83,8 +83,8 @@ namespace RecipeBook {
             CreationDate = node["creationDate"] != null 
                 ? node["creationDate"].InnerText : "No creation date found";
 
-            RecipeName = node["name"] != null 
-                ? node["name"].InnerText : "No Name Found";
+            RecipeName = node["name"] != null
+                ? node["name"].InnerText.ToLower() : "No Name Found";
 
             Category = node["category"] != null 
                 ? node["category"].InnerText : "No Category Found";

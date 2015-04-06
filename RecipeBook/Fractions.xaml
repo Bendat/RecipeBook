@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="RecipeBook.Fractions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Width="176" BorderBrush="#FF130D0D" BorderThickness="1" Height="196" Background="White">
+    <Grid Height="196" VerticalAlignment="Top" Margin="0,0,-2,0" HorizontalAlignment="Left" Width="176">
+        <Label Content="½" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="¼" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="131,10,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="¾" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅓" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅔" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅖" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="90,55,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅕" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="50,55,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅗" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="131,55,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅘" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅙" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅚" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="90,100,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅛" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="130,100,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅜" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅝" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="50,146,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Label Content="⅞" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="90,146,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
+        <Button Content="Exit" Name="Exit" MouseLeftButtonUp="Exit_OnMouseLeftButtonUp" HorizontalAlignment="Left" Margin="131,146,0,0" VerticalAlignment="Top" Width="34" Height="40"/>
+    </Grid>
+</UserControl>

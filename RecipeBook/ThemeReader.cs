@@ -25,6 +25,7 @@ namespace RecipeBook
     public class ThemeReader
     {
         private readonly XDocument _doc = XDocument.Load("xmlData/theme.xml");
+
         private readonly XElement _root;
         private readonly XElement _themeNode;
         private readonly string _activeTheme;

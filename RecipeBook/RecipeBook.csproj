@@ -139,6 +139,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Fractions.xaml.cs">
+      <DependentUpon>Fractions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecipeEditor.xaml.cs">
       <DependentUpon>RecipeEditor.xaml</DependentUpon>
     </Compile>
@@ -147,11 +150,16 @@
     </Compile>
     <Compile Include="Theme.cs" />
     <Compile Include="ThemeReader.cs" />
+    <Compile Include="Util.cs" />
     <Compile Include="WindowExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="XmlEditor.cs" />
     <Compile Include="XmlLoader.cs" />
+    <Page Include="Fractions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

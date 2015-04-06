@@ -39,6 +39,65 @@
 		        </paragraph>
             </instruction>
         </recipe>
+        <recipe id="2" cite="http://www.jamieoliver.com/recipes/rice-recipes/a-basic-risotto-recipe/#TLDiwFTxFK1t5WhS.97">
+            <creationDate>01/14/2015</creationDate>
+            <name>Basic Risotto</name>
+            <category>Italian</category>
+            <image></image>
+            <ingredientList>
+                <ingredient>
+                    1.1 litres organic stock(chicken, fish, veg)
+                </ingredient>
+                <ingredient>
+                    1 small knob of butter
+                </ingredient>
+                <ingredient>
+                    2 tablespoons olive oil
+                </ingredient>
+                <ingredient>
+                    1 large onion, finely chopped
+                </ingredient>
+                <ingredient>
+                    2 cloves garlic, finely chopped
+                </ingredient>
+                <ingredient>
+                    ½ head celery, finely chopped
+                </ingredient>
+                <ingredient>
+                    400 g risotto rice
+                </ingredient>
+                <ingredient>
+                    2 wineglasses dry white vermouth or dry white wine
+                </ingredient>
+                <ingredient>
+                    sea salt
+                </ingredient>
+                <ingredient>
+                    freshly ground black pepper
+                </ingredient>
+                <ingredient>
+                    1 knob of butter
+                </ingredient>
+                <ingredient>
+                    90 g Parmesan cheese, freshly grated
+                </ingredient>
+            </ingredientList>
+
+            <instruction>
+                <paragraph>
+                    Heat the stock. In a separate pan, heat the olive oil and butter, add the onions, garlic and celery, and fry very slowly for about 15 minutes without colouring. When the vegetables have softened, add the rice and turn up the heat.
+                </paragraph>
+                <paragraph>
+                    The rice will now begin to lightly fry, so keep stirring it. After a minute it will look slightly transparent. Add the vermouth or wine and keep stirring — it will smell fantastic. Any harsh alcohol flavours will evaporate and leave the rice with a tasty essence
+                </paragraph>
+                <paragraph>
+                    Once the vermouth or wine has cooked into the rice, add your first ladle of hot stock and a good pinch of salt. Turn down the heat to a simmer so the rice doesn't cook too quickly on the outside. Keep adding ladlefuls of stock, stirring and almost massaging the creamy starch out of the rice, allowing each ladleful to be absorbed before adding the next. This will take around 15 minutes. Taste the rice — is it cooked? Carry on adding stock until the rice is soft but with a slight bite. Don't forget to check the seasoning carefully. If you run out of stock before the rice is cooked, add some boiling water.
+                </paragraph>
+                <paragraph>
+                    Remove from the heat and add the butter and Parmesan. Stir well. Place a lid on the pan and allow to sit for 2 minutes. This is the most important part of making the perfect risotto, as this is when it becomes outrageously creamy and oozy like it should be. Eat it as soon as possible, while the risotto retains its beautiful texture.
+                </paragraph>
+            </instruction>
+        </recipe>
         
     </recipes>
 

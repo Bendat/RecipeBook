@@ -62,7 +62,7 @@
                    Background="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}}">
             
                    <Run Language="en-ie" Text="Recipe Book"/></TextBlock>
-        <ListView Name="RecipeList" 
+        <ListView Name="RecipeList"
                   Grid.Row="0" Grid.Column="0" Width="166" Margin="0,30,0,0" 
                   HorizontalAlignment="Left" Background="#003E3E3E" BorderThickness="0,0,1,0" 
                   BorderBrush="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}}" 
@@ -75,9 +75,8 @@
             </ListView.ItemContainerStyle>
 
             <ListView.GroupStyle>
-                <GroupStyle ContainerStyle="{StaticResource ContainerStyle}" />
+                <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"  />
             </ListView.GroupStyle>
-
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <TextBlock FontSize="14" TextAlignment="Center" Padding="3" Margin="0" 

@@ -109,7 +109,6 @@ namespace RecipeBook
             string category = (from textBox in textBoxs
                                where textBox.Name == CatBox.Name
                                select CatBox.Text).First();
-            category = FirstToUpperCase(category);
             string date = DateTime.Now.ToString("dd MMMM yyyy");
             string[] ingredients = (new TextRange(
                             IngredientsInputTextBox.Document.ContentStart,
@@ -186,15 +185,21 @@ namespace RecipeBook
             parent = Window.GetWindow(this);
             parent.Close();
         }
-        private string FirstToUpperCase(string text)
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(text))
+            Fractions fraction = new Fractions();
+            Window window = new Window
             {
-                return text;
-            }
-            char[] charArray = text.ToCharArray();
-            charArray[0] = char.ToUpper(charArray[0]);
-            return new String(charArray);
+                Content = fraction,
+                Height = 196,
+                Width = 176,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            window.ShowDialog();
         }
+        
     }
 }

@@ -146,7 +146,7 @@
         <Button Content="Image" HorizontalAlignment="Left" Margin="160,70,0,0" 
                     VerticalAlignment="Top" Name="ImageDialog" 
                     PreviewMouseLeftButtonUp="ImageDialog_OnMouseLeftButtonUp" 
-                    Width="135" Height="29" TabIndex="4"/>
+                    Width="155" Height="29" TabIndex="4" Background="#00DDDDDD"/>
         <RichTextBox HorizontalAlignment="Left" Height="303" Margin="10,152,0,0" 
                          Name="IngredientsInputTextBox"  VerticalAlignment="Top" 
                          Width="305" TabIndex="5"/>
@@ -155,19 +155,20 @@
                          TabIndex="6"/>
         <Button Content="OK" Name="OkButton" 
                     PreviewMouseLeftButtonUp="OkButton_OnPreviewMouseLeftButtonUp" 
-                     TabIndex="7" HorizontalAlignment="Right" Width="120" Height="35" VerticalAlignment="Top" Margin="0,460,135,0" BorderBrush="#FFCBCACA" BorderThickness="1"/>
-        <Button Content="Cancel"  TabIndex="8" Click="Button_Click_1" HorizontalAlignment="Right" Width="120" Height="35" VerticalAlignment="Top" Margin="0,460,10,0" BorderBrush="#FFCBCACA"/>
+                     TabIndex="7" HorizontalAlignment="Right" Width="120" Height="35" VerticalAlignment="Top" Margin="0,460,135,0" BorderBrush="#FFCBCACA" BorderThickness="1" FontSize="16"/>
+        <Button Content="Cancel"  TabIndex="8" Click="Button_Click_1" HorizontalAlignment="Right" Width="120" Height="35" VerticalAlignment="Top" Margin="0,460,10,0" BorderBrush="#FFCBCACA" FontSize="16"/>
         <Label Content=" ?" HorizontalAlignment="Left" Margin="292,30,0,0" VerticalAlignment="Top" 
                    Height="35" FontSize="20" 
                    ToolTip="Found this recipe on a website? Type the address here" Width="28" RenderTransformOrigin="0.536,0.107"/>
-        <Label Content=" ?" HorizontalAlignment="Left" Margin="292,64,0,0" VerticalAlignment="Top" 
-                   Height="35" FontSize="20" ToolTip="Why not take a photo of your recipe and add it here." Width="25"/>
+        <Label Content=" ?" HorizontalAlignment="Left" Margin="292,65,0,0" VerticalAlignment="Top" 
+                   Height="34" FontSize="20" ToolTip="Why not take a photo of your recipe and add it here." Width="25"/>
         <Label Content="Type your list of Ingredients here. &#xD;&#xA;Separate Ingredients by pressing the enter key." 
                    Margin="10,103,445,0" VerticalAlignment="Top" Background="DarkGoldenrod" 
                    FontSize="14" BorderBrush="DarkGoldenrod" Foreground="White" Height="49"/>
         <Label Content="Type your list of instructions here. &#xD;&#xA;Separate instructions by pressing the enter key." 
                    Margin="320,37,9,0" VerticalAlignment="Top" Background="DarkGoldenrod" 
                    Foreground="White" FontSize="14" BorderBrush="DarkGoldenrod" Height="49"/>
+        <Button Content="Want to write a fraction? Click here" HorizontalAlignment="Left" Margin="10,460,0,0" VerticalAlignment="Top" Width="230" Height="35" Click="Button_Click_2" Background="DarkGoldenrod" BorderBrush="#FF531010" Foreground="White" FontSize="14"/>
 
     </Grid>
 </UserControl>

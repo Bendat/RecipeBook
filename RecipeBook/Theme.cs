@@ -21,10 +21,8 @@ namespace RecipeBook
 {
     /// <summary>
     /// A class that describes a theme.
-    /// When instantiated it reads from the theme.xml file
-    /// Otherwise it sets to the default "honey" theme.
     /// </summary>
-    public class Theme
+    static class Theme
     {
         public static Brush BackgroundColor = Brushes.DarkGoldenrod;
         public static Brush UiTextColor = Brushes.Cornsilk;
@@ -33,11 +31,10 @@ namespace RecipeBook
         public static Brush TextHoverColor = Brushes.Goldenrod;
         public static Brush MainTextColor = Brushes.Cornsilk;
         public static readonly ThemeReader ThemeReader = new ThemeReader();
-        public Theme()
-        {
-            SetTheme();
-        }
-        
+        /// <summary>
+        /// The SetTheme method will override the default theme and use the
+        /// active theme from theme.xml.
+        /// </summary>
         public static void SetTheme()
         {
             if (ThemeReader != null)
