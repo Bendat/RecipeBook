@@ -78,8 +78,8 @@
                 <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"  />
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
-                <DataTemplate >
-                    <TextBlock FontSize="14" TextAlignment="Center" Padding="3" Margin="0" 
+                <DataTemplate DataType="recipeBook:Recipe">
+                    <TextBlock FontSize="16" TextAlignment="Center" Padding="3" Margin="0" 
                                Text="{Binding RecipeName}" Foreground="{x:Static recipeBook:Theme.UiTextColor}"
                     />
                 </DataTemplate>
@@ -252,8 +252,8 @@
                      VerticalScrollBarVisibility="Auto" BorderThickness="0" Background="#003E3E3E"
                      />
 
-        <TextBlock x:Name="RecipeSource" Canvas.Left="895" TextWrapping="Wrap" 
-                   Canvas.Top="162" Width="117" Margin="0,235,10,0"
+        <TextBlock x:Name="RecipeSource" TextWrapping="Wrap" 
+                   Width="117" Margin="0,235,10,0"
                    HorizontalAlignment="Right" Height="90" VerticalAlignment="Top">
             <Hyperlink Name="HyperLabel" RequestNavigate="Hyperlink_RequestNavigate" 
                        Foreground="{x:Static recipeBook:Theme.UiTextColor}">

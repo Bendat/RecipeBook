@@ -20,6 +20,6 @@
         <Label Content="⅜" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
         <Label Content="⅝" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="50,146,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
         <Label Content="⅞" MouseLeftButtonUp="Fraction_Click" HorizontalAlignment="Left" Margin="90,146,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="24" BorderBrush="#FFBFBFBF" BorderThickness="1"/>
-        <Button Content="Exit" Name="Exit" MouseLeftButtonUp="Exit_OnMouseLeftButtonUp" HorizontalAlignment="Left" Margin="131,146,0,0" VerticalAlignment="Top" Width="34" Height="40"/>
+        <Button Content="Exit" Name="Exit" PreviewMouseLeftButtonUp="Exit_OnMouseLeftButtonUp" HorizontalAlignment="Left" Margin="131,146,0,0" VerticalAlignment="Top" Width="34" Height="40" BorderBrush="{x:Null}"/>
     </Grid>
 </UserControl>
