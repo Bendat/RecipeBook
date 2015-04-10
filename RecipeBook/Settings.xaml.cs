@@ -1,7 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 /*  Copyright (C) 2015 Ben Aherne
 
     This program is free software: you can redistribute it and/or modify
@@ -21,9 +26,9 @@ namespace RecipeBook
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class Settings
+    public partial class Settings : UserControl
     {
-        private Window _parentWindow;
+        private Window parent;
         public Settings()
         {
             InitializeComponent();
@@ -31,7 +36,7 @@ namespace RecipeBook
         //retrieves the selected option. 
         private string ProcessData()
         {
-            var checkedButton = 
+            RadioButton checkedButton = 
                 (from a in MainGrid.Children.OfType<RadioButton>()
                  where a.IsChecked == true
                  select a).First();
@@ -39,24 +44,21 @@ namespace RecipeBook
         }
         private void TitleBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
-            if (_parentWindow != null) _parentWindow.DragMove();
+            parent = Window.GetWindow(this);
+            parent.DragMove();
         }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
-            if (_parentWindow != null) _parentWindow.Close();
+            parent = Window.GetWindow(this);
+            parent.Close();
         }
-
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
+            parent = Window.GetWindow(this);
             string theme = ProcessData();
-            ThemeReader tr = new ThemeReader();
-            tr.SetActive(theme);
+            Theme.ThemeReader.SetActive(theme);
             MessageBox.Show("Changes will take effect next time you start the program");
-            if (_parentWindow != null) _parentWindow.Close();
+            parent.Close();
             ((MainWindow)Application.Current.MainWindow).Run();
         }
     }

@@ -59,11 +59,10 @@ namespace RecipeBook
         public void AddHyperLink(Hyperlink hypLink, string url)
         {
             hypLink.Inlines.Clear();
-            url = Util.ToValidUri(url).ToString();
             if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
             {
                 hypLink.NavigateUri = new Uri(url, UriKind.RelativeOrAbsolute);
-                hypLink.Inlines.Add(Util.ToSimpleUrl(url));
+                hypLink.Inlines.Add(url);
             }
             else
             {

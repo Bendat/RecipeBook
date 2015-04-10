@@ -1,4 +1,8 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Media;
 /*  Copyright (C) 2015 Ben Aherne
 
     This program is free software: you can redistribute it and/or modify
@@ -26,26 +30,21 @@ namespace RecipeBook
         public static Brush SelectionColor = Brushes.Goldenrod;
         public static Brush TextHoverColor = Brushes.Goldenrod;
         public static Brush MainTextColor = Brushes.Cornsilk;
-        private static ThemeReader _themeReader; 
-
+        public static readonly ThemeReader ThemeReader = new ThemeReader();
         /// <summary>
-        /// The UseTheme method will override the default theme and use the
+        /// The SetTheme method will override the default theme and use the
         /// active theme from theme.xml.
         /// </summary>
-        /// <param name="doUseTheme">Tells the class if it should use the theme file.</param>
-        
-        //doUseTheme is an ugly fix for a path error caused by binding this class to xaml controls.
-        public static void UseTheme(bool doUseTheme)
+        public static void SetTheme()
         {
-            if (doUseTheme)
+            if (ThemeReader != null)
             {
-                _themeReader = new ThemeReader();
-                BackgroundColor = _themeReader.BackgroundColor;
-                UiTextColor = _themeReader.UiTextColor;
-                HeaderColor = _themeReader.HeaderColor;
-                SelectionColor = _themeReader.SelectionColor;
-                TextHoverColor = _themeReader.TextHoverColor;
-                MainTextColor = _themeReader.MainTextColor;
+                BackgroundColor = ThemeReader.BackgroundColor;
+                UiTextColor = ThemeReader.UiTextColor;
+                HeaderColor = ThemeReader.HeaderColor;
+                SelectionColor = ThemeReader.SelectionColor;
+                TextHoverColor = ThemeReader.TextHoverColor;
+                MainTextColor = ThemeReader.MainTextColor;
             }
         }
     }

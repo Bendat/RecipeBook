@@ -43,7 +43,7 @@ namespace RecipeBook
 
         public MainWindow()
         {
-            Theme.UseTheme(true);
+            Theme.SetTheme();
             InitializeComponent();
             Run();
         }
@@ -157,7 +157,7 @@ namespace RecipeBook
             Window window = new Window
             {
                 Content = editor,
-                Height = 500, ShowInTaskbar = false,
+                Height = 500,
                 Width = 760,
                 AllowsTransparency = true,
                 WindowStyle = WindowStyle.None,

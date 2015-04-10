@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Xml;
 
 namespace RecipeBook
@@ -12,9 +18,9 @@ namespace RecipeBook
     /// <summary>
     /// Interaction logic for RecipeEditor.xaml
     /// </summary>
-    public partial class RecipeEditor
+    public partial class RecipeEditor : UserControl
     {
-        private Window _parentWindow;
+        private Window parent;
         private readonly int _recipeId;
         private readonly Boolean _isEdit;
         private string _imageFileName;
@@ -35,17 +41,14 @@ namespace RecipeBook
 
         private void TitleBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
-            if (_parentWindow != null)
-            {
-                _parentWindow.WindowState = WindowState.Normal;
-                _parentWindow.DragMove();
-            }
+            parent = Window.GetWindow(this);
+            parent.WindowState = WindowState.Normal;
+            parent.DragMove();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
-            if (_parentWindow != null) _parentWindow.Close();
+            parent = Window.GetWindow(this);
+            parent.Close();
         }
 
 
@@ -92,7 +95,7 @@ namespace RecipeBook
         private Dictionary<String, Object> RetrieveData()
         {
             Dictionary<String, Object> items = new Dictionary<string, object>();
-            var textBoxes = MainDataGrid.Children.OfType<TextBox>();
+            var textBoxes = this.MainDataGrid.Children.OfType<TextBox>();
             var textBoxs = textBoxes as TextBox[] ?? textBoxes.ToArray();
 
             string recipeName = (from textBox in textBoxs
@@ -128,7 +131,7 @@ namespace RecipeBook
         }
         private void AddNodeToEditor()
         {
-            XmlNode node = XmlLoader.FindbyId(_recipeId);
+            XmlNode node = XmlEditor.FindbyId(_recipeId);
             if (node == null)
             {
                 return;
@@ -168,19 +171,19 @@ namespace RecipeBook
         }
         private void OkButton_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
+            parent = Window.GetWindow(this);
             Dictionary<String, Object> data = RetrieveData();
             XmlEditor xmle = new XmlEditor(data);
             var newNode = _isEdit ? xmle.EditXmlNode(XmlLoader.FindbyId(_recipeId)) : xmle.MakeNode();
             xmle.WriteNodeToFile(newNode);
-            if (_parentWindow != null) _parentWindow.Close();
+            parent.Close();
             ((MainWindow)Application.Current.MainWindow).Run();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            _parentWindow = Window.GetWindow(this);
-            if (_parentWindow != null) _parentWindow.Close();
+            parent = Window.GetWindow(this);
+            parent.Close();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -189,8 +192,9 @@ namespace RecipeBook
             Window window = new Window
             {
                 Content = fraction,
-                Height = 196, ShowInTaskbar = false,
-                Width = 176, AllowsTransparency = true,
+                Height = 196,
+                Width = 176,
+                AllowsTransparency = true,
                 WindowStyle = WindowStyle.None,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
