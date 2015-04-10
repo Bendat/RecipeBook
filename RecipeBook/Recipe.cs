@@ -79,7 +79,6 @@ namespace RecipeBook {
                     Source = node.Attributes["cite"].Value;
                 }
             }
-
             CreationDate = node["creationDate"] != null 
                 ? node["creationDate"].InnerText : "No creation date found";
 
