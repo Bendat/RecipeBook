@@ -36,11 +36,12 @@ namespace RecipeBook
         /// <summary>
         /// A collection of Recipe objects.
         /// </summary>
-        private ObservableCollection<Recipe> Recipes { get; set; }
+        private ObservableCollection<Recipe> Recipes {get; set; }
         private const string WelcomeFile = "WelcomeScreen/welcome.rtf";
+        private string _recipeFile = @"xmlData\recipe.rcpbk";
         private FileStream _fs;
         private int _currentId;
-
+        private string imageFolder = @"/images/userimages/";
         public MainWindow()
         {
             Theme.SetTheme();
@@ -54,17 +55,16 @@ namespace RecipeBook
         public void Run()
         {
             Recipes = new ObservableCollection<Recipe>();
-            var view = CollectionViewSource.GetDefaultView(Recipes);
             Maximiser winMaximiser = new Maximiser(PrimaryWindow);
-            winMaximiser.Run();
-            LoadRecipes();
-            LoadRichTextBox();
+            var view = CollectionViewSource.GetDefaultView(Recipes);
             view.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
             view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("RecipeName", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("id", ListSortDirection.Ascending));
+            winMaximiser.Run();
+            LoadRecipes();
+            LoadRichTextBox();
             RecipeList.ItemsSource = view;
-            
         }
         //Sets up the welcome screen. Clears all other text fields.
         private void LoadRichTextBox()
@@ -83,7 +83,7 @@ namespace RecipeBook
         //Loads the default recipe file into the XmlLoader class.
         private void LoadRecipes()
         {
-            XmlLoader.LoadRecipeBook(@"xmlData\recipe.xml");
+            XmlLoader.LoadRecipeBook(_recipeFile);
             XmlNodeList recipeNodeList = XmlLoader.Doc.GetElementsByTagName("recipe");
             foreach (XmlNode node in recipeNodeList)
             {
@@ -112,12 +112,22 @@ namespace RecipeBook
                 RecipeFormatter rf = new RecipeFormatter();
                 rf.AddContent(TitleBox, loadedRecipe.RecipeName, DocumentSection.Title);
                 rf.AddPrompt(InstructionsPrompt, " method", DocumentSection.Prompt, true);
+                
                 rf.AddContent(BodyText, loadedRecipe.Instructions, DocumentSection.Text);
                 rf.AddPrompt(IngredientsPrompt, "Ingredients", DocumentSection.Prompt);
                 rf.AddContent(IngredientsText, loadedRecipe.Ingredients, DocumentSection.Text, .8);
                 if (!string.IsNullOrEmpty(loadedRecipe.Source))
                 {
                     rf.AddHyperLink(HyperLabel, loadedRecipe.Source);
+                }
+                string loc = Directory.GetCurrentDirectory();
+                if (File.Exists(loc + imageFolder + loadedRecipe.ImageLocation))
+                {
+                    rf.AddImage(Thumbnail, loc + imageFolder + loadedRecipe.ImageLocation);
+                }
+                else
+                {
+                    rf.AddImage(Thumbnail, loc + imageFolder + "cookbookicon2.ico");
                 }
             }
         }

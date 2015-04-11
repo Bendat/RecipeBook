@@ -110,11 +110,11 @@ namespace RecipeBook
             _date.InnerText = _recipeDictionary["date"].ToString();
             _name.InnerText = _recipeDictionary["name"].ToString();
             _category.InnerText = _recipeDictionary["category"].ToString();
-            //image.InnerText = recipeDictionary["image"].ToString();
+            _image.InnerText = FileHandler.AddImageToApp(_recipeDictionary["image"].ToString());
             node.AppendChild(_date);
             node.AppendChild(_name);
             node.AppendChild(_category);
-            // rcp.AppendChild(image);
+            node.AppendChild(_image);
             NodeFromArray(_ingredients, ingrList, "ingredient");
             node.AppendChild(_ingredients);
             NodeFromArray(_instructions, methodList, "paragraph");
@@ -135,7 +135,7 @@ namespace RecipeBook
         {
             var recipeNodeList = Doc.GetElementsByTagName("recipe");
             if (recipeNodeList.Count == 0) return 0;
-            var xdoc = XDocument.Load("xmlData/recipe.xml");
+            var xdoc = XDocument.Load("xmlData/recipe.rcpbk");
             int maxId = xdoc.Descendants("recipe")
                         .Max(x => (int)x.Attribute("id"));
             return maxId;

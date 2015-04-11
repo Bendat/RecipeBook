@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 /*  Copyright (C) 2015 Ben Aherne
 
@@ -59,10 +60,11 @@ namespace RecipeBook
         public void AddHyperLink(Hyperlink hypLink, string url)
         {
             hypLink.Inlines.Clear();
+            url = Util.ToValidUri(url).ToString();
             if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
             {
                 hypLink.NavigateUri = new Uri(url, UriKind.RelativeOrAbsolute);
-                hypLink.Inlines.Add(url);
+                hypLink.Inlines.Add(Util.ToSimpleUrl(url));
             }
             else
             {
@@ -133,6 +135,18 @@ namespace RecipeBook
             box.Document.Blocks.Clear();
             List list = MakeListItems(content, DocumentSection.Text, fontSizeRatio);
             box.Document.Blocks.Add(list);
+        }
+        /// <summary>
+        /// Adds an image to the provided Image object.
+        /// </summary>
+        /// <param name="img">The Image object to modify.</param>
+        /// <param name="location">The relative or absolute location of the image file.</param>
+        public void AddImage(Image img, string location)
+        {
+            
+            Uri uri = new Uri(location, UriKind.RelativeOrAbsolute);
+            ImageSource imgSource = new BitmapImage(uri); 
+            img.Source = imgSource;
         }
         private Paragraph SeperatorLine()
         {

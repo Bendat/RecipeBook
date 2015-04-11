@@ -237,9 +237,9 @@
                IsManipulationEnabled="true" FontSize="16" HorizontalAlignment="Right" 
                Width="86" Style="{StaticResource MouseOverStyle}" TabIndex="3" Cursor="Hand" Height="33"
         />
-        <Image Height="140" Margin="0,68,0,0" VerticalAlignment="Top" 
-               Source="cookbookicon2.ico" Stretch="UniformToFill" 
-               HorizontalAlignment="Right" Width="156"/>
+        <Image Name="Thumbnail" Height="132" Margin="0,68,10,0" VerticalAlignment="Top" 
+               Source="cookbookicon2.ico" 
+               HorizontalAlignment="Right" Width="127"/>
         <RichTextBox IsReadOnly="True" Name="IngredientsText" HorizontalAlignment="Left" 
                      Margin="166,180,0,0" Width="206" Background="#003E3E3E" 
                      SelectionBrush="{Binding Source={x:Static recipeBook:Theme.SelectionColor}}"

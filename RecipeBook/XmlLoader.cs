@@ -66,7 +66,8 @@ namespace RecipeBook
             XElement xElement = newDocument.Element("data");
             if (xElement != null)
                 xElement.Add(new XElement("recipes", String.Empty));
-            newDocument.Save(location);        }
+            newDocument.Save(location);        
+        }
 
     }
 }
