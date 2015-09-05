@@ -7,6 +7,10 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
+/********************************/
+//TODO: convert to linq-to-xml/
+/********************************/
+
 /*  Copyright (C) 2015 Ben Aherne
 
     This program is free software: you can redistribute it and/or modify
@@ -134,7 +138,10 @@ namespace RecipeBook
         private int FindHighestId()
         {
             var recipeNodeList = Doc.GetElementsByTagName("recipe");
-            if (recipeNodeList.Count == 0) return 0;
+            if (recipeNodeList.Count == 0)
+            {
+                return 0;
+            }
             var xdoc = XDocument.Load("xmlData/recipe.rcpbk");
             int maxId = xdoc.Descendants("recipe")
                         .Max(x => (int)x.Attribute("id"));

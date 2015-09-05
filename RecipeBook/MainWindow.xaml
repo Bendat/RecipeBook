@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen"
         BorderThickness="1" WindowStyle="None" Visibility="Visible" 
         AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Foreground="Cornsilk"
-        Name="PrimaryWindow" BorderBrush="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}}"
+        Name="PrimaryWindow" BorderBrush="{Binding Source={x:Static recipeBook:Theme.BackgroundColor}, Mode=OneWay}"
         >
     <Window.Resources>
         <Style x:Key="ContainerStyle" TargetType="{x:Type GroupItem}">
@@ -253,7 +253,7 @@
                      />
 
         <TextBlock x:Name="RecipeSource" Canvas.Left="895" TextWrapping="Wrap" 
-                   Canvas.Top="162" Width="117" Margin="0,235,10,0"
+                   Canvas.Top="162" Width="117" Margin="0,205,10,0"
                    HorizontalAlignment="Right" Height="90" VerticalAlignment="Top">
             <Hyperlink Name="HyperLabel" RequestNavigate="Hyperlink_RequestNavigate" 
                        Foreground="{x:Static recipeBook:Theme.UiTextColor}">

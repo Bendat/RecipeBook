@@ -30,22 +30,24 @@ namespace RecipeBook
         public static Brush SelectionColor = Brushes.Goldenrod;
         public static Brush TextHoverColor = Brushes.Goldenrod;
         public static Brush MainTextColor = Brushes.Cornsilk;
-        public static readonly ThemeReader ThemeReader = new ThemeReader();
+        private static readonly ThemeReader ThemeReader = new ThemeReader();
         /// <summary>
         /// The SetTheme method will override the default theme and use the
         /// active theme from theme.xml.
         /// </summary>
         public static void SetTheme()
         {
-            if (ThemeReader != null)
-            {
-                BackgroundColor = ThemeReader.BackgroundColor;
-                UiTextColor = ThemeReader.UiTextColor;
-                HeaderColor = ThemeReader.HeaderColor;
-                SelectionColor = ThemeReader.SelectionColor;
-                TextHoverColor = ThemeReader.TextHoverColor;
-                MainTextColor = ThemeReader.MainTextColor;
-            }
+            BackgroundColor = ThemeReader.BackgroundColor;
+            UiTextColor = ThemeReader.UiTextColor;
+            HeaderColor = ThemeReader.HeaderColor;
+            SelectionColor = ThemeReader.SelectionColor;
+            TextHoverColor = ThemeReader.TextHoverColor;
+            MainTextColor = ThemeReader.MainTextColor;
+        }
+
+        public static void SaveActiveTheme(string theme)
+        {
+            ThemeReader.SetActive(theme);
         }
     }
 }

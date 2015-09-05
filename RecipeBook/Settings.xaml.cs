@@ -34,7 +34,7 @@ namespace RecipeBook
             InitializeComponent();
         }
         //retrieves the selected option. 
-        private string ProcessData()
+        private string ProcessPreferences()
         {
             RadioButton checkedButton = 
                 (from a in MainGrid.Children.OfType<RadioButton>()
@@ -55,11 +55,10 @@ namespace RecipeBook
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             parent = Window.GetWindow(this);
-            string theme = ProcessData();
-            Theme.ThemeReader.SetActive(theme);
+            string theme = ProcessPreferences();
+            Theme.SaveActiveTheme(theme);
             MessageBox.Show("Changes will take effect next time you start the program");
             parent.Close();
-            ((MainWindow)Application.Current.MainWindow).Run();
         }
     }
 }

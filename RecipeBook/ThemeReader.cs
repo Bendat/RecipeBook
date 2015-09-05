@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Media;
 using System.Xml.Linq;
@@ -24,8 +25,10 @@ namespace RecipeBook
     /// </summary>
     public class ThemeReader
     {
-        private readonly XDocument _doc = XDocument.Load("xmlData/theme.xml");
-
+        private static readonly string Basepath = Directory.GetCurrentDirectory();
+        private static string File = Basepath+"/xmlData/theme.xml";
+        private readonly XDocument _doc = XDocument.Load(File);
+        private static string SaveFile = File;
         private readonly XElement _root;
         private readonly XElement _themeNode;
         private readonly string _activeTheme;
@@ -54,9 +57,8 @@ namespace RecipeBook
         public void SetActive(string newTheme)
         {
             Console.WriteLine(_root.Attribute("active").Value);
-            _root.Attribute("active")
-                .SetValue(newTheme);
-            _doc.Save("xmlData/theme.xml");
+            _root.Attribute("active").SetValue(newTheme);
+            _doc.Save(SaveFile);
         }
 
         private XAttribute GetTheme()

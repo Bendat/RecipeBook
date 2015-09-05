@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 /*  Copyright (C) 2015 Ben Aherne
 
@@ -61,11 +62,11 @@ namespace RecipeBook {
         /// <summary>
         /// An set of ingredients needed for the recipe.
         /// </summary>
-        public ArrayList Ingredients = new ArrayList();
+        public List<string> Ingredients = new List<string>();
         /// <summary>
         /// A set of instructions needed for the recipe.
         /// </summary>
-        public ArrayList Instructions = new ArrayList();
+        public List<string> Instructions = new List<string>();
 
         //Converts an XmlNode object into a Recipe object.
         private void CreateRecipe(XmlNode node)
