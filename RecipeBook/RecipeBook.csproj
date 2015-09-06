@@ -200,9 +200,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Config.Designer.cs">
+    <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Config.settings</DependentUpon>
+      <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -212,9 +212,9 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="Properties\app.manifest" />
-    <None Include="Config.settings">
+    <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Config.Designer.cs</LastGenOutput>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="resources\icons\exittransparent.pdn" />

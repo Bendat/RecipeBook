@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Schema;
 
 /*  Copyright (C) 2015 Ben Aherne
 

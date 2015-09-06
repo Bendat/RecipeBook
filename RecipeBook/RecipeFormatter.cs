@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -131,7 +130,7 @@ namespace RecipeBook
         /// <param name="content">The ArrayList to parse into paragraphs.</param>
         /// <param name="section">Specifies which section of the window the RichTextBox should be styled as.</param>
         /// <param name="fontSizeRatio">Optional parameter, allows font size manipulation,</param>
-        public void AddContent(RichTextBox box, List<string> content, DocumentSection section, double fontSizeRatio = 1)
+        public void AddContent(RichTextBox box, ArrayList content, DocumentSection section, double fontSizeRatio = 1)
         {
             box.Document.Blocks.Clear();
             List list = MakeListItems(content, DocumentSection.Text, fontSizeRatio);
@@ -177,7 +176,7 @@ namespace RecipeBook
             return paragraph;
         }
 
-        private List MakeListItems(List<string> list, DocumentSection section, double fontSizeRatio = 1)
+        private List MakeListItems(ArrayList list, DocumentSection section, double fontSizeRatio = 1)
         {
             List paragraphList = new List
             {

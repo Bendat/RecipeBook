@@ -100,6 +100,7 @@ namespace RecipeBook
                 return;
             }
             int id = selectedStockObject.Id;
+            selectedStockObject.CreateRecipe(selectedStockObject.Id);
             var rec = from recipe in Recipes
                       where recipe.Id == id
                       select recipe;

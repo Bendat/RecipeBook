@@ -1,3 +1,0 @@
-Add the ability to share recipes to anyone within gps range
-
-Multiusers

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeBook", "..\..\..\..\Source\Repos\RecipeBook\RecipeBook\RecipeBook.csproj", "{894D3CD4-2392-4555-B908-01D84702115E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeBook", "RecipeBook\RecipeBook.csproj", "{894D3CD4-2392-4555-B908-01D84702115E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
