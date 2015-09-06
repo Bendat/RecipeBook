@@ -79,7 +79,7 @@ namespace RecipeBook
         private void ImageDialog_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Document";
+            dlg.FileName = "Image";
             dlg.DefaultExt = ".jpg";
             dlg.Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|" +
                          "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff";
@@ -110,6 +110,7 @@ namespace RecipeBook
                                where textBox.Name == CatBox.Name
                                select CatBox.Text).First();
             string date = DateTime.Now.ToString("dd MMMM yyyy");
+            
             string[] ingredients = (new TextRange(
                             IngredientsInputTextBox.Document.ContentStart,
                             IngredientsInputTextBox.Document.ContentEnd
@@ -168,7 +169,14 @@ namespace RecipeBook
                     }
                 }
             }
+            if (node["image"] != null)
+            {
+                _imageFileName = node["image"].InnerText;
+                ImageDialog.Content = _imageFileName;
+                
+            }
         }
+
         private void OkButton_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             parent = Window.GetWindow(this);

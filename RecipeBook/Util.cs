@@ -95,6 +95,7 @@ namespace RecipeBook
         /// <returns>Boolean true if the image is too big, false otherwise</returns>
         public static bool IsImageTooLarge(string location, int maxWidth)
         {
+            Console.WriteLine(location);
             Image img = new Bitmap(location);
             return img.Width > maxWidth;
         }

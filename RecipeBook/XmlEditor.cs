@@ -105,12 +105,18 @@ namespace RecipeBook
         //Or overwrites the contents of an existing node.
         private void AddFieldsToNode(XmlNode node)
         {
+            Console.WriteLine(1);
             var ingrList = (IEnumerable<string>)_recipeDictionary["ingr"];
             var methodList = (IEnumerable<string>)_recipeDictionary["instr"];
+            Console.WriteLine(2);
             _date.InnerText = _recipeDictionary["date"].ToString();
+            Console.WriteLine(3);
             _name.InnerText = _recipeDictionary["name"].ToString();
+            Console.WriteLine(4);
             _category.InnerText = _recipeDictionary["category"].ToString();
+            Console.WriteLine(5);
             _image.InnerText = FileHandler.AddImageToApp(_recipeDictionary["image"].ToString());
+            Console.WriteLine(6);
             node.AppendChild(_date);
             node.AppendChild(_name);
             node.AppendChild(_category);

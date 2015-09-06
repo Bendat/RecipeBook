@@ -232,10 +232,15 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label Name="SettingsLabel" Content="Settings" Margin="0,30,35,0" VerticalAlignment="Top" 
+        <Label Name="SettingsLabel" Content="Settings" Margin="0,30,50,0" VerticalAlignment="Top" 
                MouseLeftButtonUp="SettingsLabel_OnMouseLeftButtonUp"
                IsManipulationEnabled="true" FontSize="16" HorizontalAlignment="Right" 
-               Width="86" Style="{StaticResource MouseOverStyle}" TabIndex="3" Cursor="Hand" Height="33"
+               Width="71" Style="{StaticResource MouseOverStyle}" TabIndex="3" Cursor="Hand" Height="33"
+        />
+        <Label Name="UserLabel" Content="User" Margin="0,30,10,0" VerticalAlignment="Top" 
+               MouseLeftButtonUp="SettingsLabel_OnMouseLeftButtonUp"
+               IsManipulationEnabled="true" FontSize="16" HorizontalAlignment="Right" 
+               Width="45" Style="{StaticResource MouseOverStyle}" TabIndex="3" Cursor="Hand" Height="33"
         />
         <Image Name="Thumbnail" Height="132" Margin="0,68,10,0" VerticalAlignment="Top" 
                Source="cookbookicon2.ico" 
@@ -243,11 +248,11 @@
         <RichTextBox IsReadOnly="True" Name="IngredientsText" HorizontalAlignment="Left" 
                      Margin="166,180,0,0" Width="206" Background="#003E3E3E" 
                      SelectionBrush="{Binding Source={x:Static recipeBook:Theme.SelectionColor}}"
-                     BorderBrush="#A53E3E3E" BorderThickness="0"
+                     BorderBrush="#A53E3E3E" BorderThickness="0" ScrollViewer.PanningMode="Both"
                      Foreground="{x:Static recipeBook:Theme.UiTextColor}"
                      />
         <RichTextBox IsReadOnly="True" Name="BodyText"  Margin="372,180,156,0" 
-                     Foreground="Cornsilk" BorderBrush="#A53E3E3E" 
+                     Foreground="Cornsilk" BorderBrush="#A53E3E3E" ScrollViewer.PanningMode="Both"
                      SelectionBrush="{Binding Source={x:Static recipeBook:Theme.SelectionColor}}"
                      VerticalScrollBarVisibility="Auto" BorderThickness="0" Background="#003E3E3E"
                      />

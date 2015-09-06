@@ -66,24 +66,37 @@ namespace RecipeBook {
         /// A set of instructions needed for the recipe.
         /// </summary>
         public ArrayList Instructions = new ArrayList();
+
+        private void ReadyRecipe(XmlNode node)
+        {
+            if (node.Attributes == null) return;
+            if (node.Attributes["id"] != null)
+            {
+                Id = Convert.ToInt32(node.Attributes["id"].Value);
+                RecipeName = node["name"].InnerText.ToLower();
+                Category = node["category"] != null
+                        ? node["category"].InnerText : "No Category Found";
+            }
+
+        }
+
         //Converts an XmlNode object into a Recipe object.
         public void CreateRecipe(int id)
         {
-            XmlNode node = XmlLoader.FindbyId(id);
-
+            var node = XmlLoader.FindbyId(id);
             if (node.Attributes == null) return;
             if (node.Attributes["cite"] != null)
             {
                 Source = node.Attributes["cite"].Value;
             }
-            CreationDate = node["creationDate"] != null
+            CreationDate = node["creationDate"] != null 
                 ? node["creationDate"].InnerText : "No creation date found";
 
             RecipeName = node["name"] != null
                 ? node["name"].InnerText.ToLower() : "No Name Found";
 
-            ImageLocation = node["image"] != null
-                ? node["image"].InnerText : " ";
+            ImageLocation = node["image"] != null 
+                ? Constants.ImageFolder + node["image"].InnerText : " ";
 
             if (node["ingredientList"] != null)
             {
@@ -107,19 +120,6 @@ namespace RecipeBook {
             {
                 Instructions.Add("No instructions found");
             }
-        }
-
-        private void ReadyRecipe(XmlNode node)
-        {
-            if (node.Attributes == null) return;
-            if (node.Attributes["id"] != null)
-            {
-                Id = Convert.ToInt32(node.Attributes["id"].Value);
-                RecipeName = node["name"].InnerText.ToLower();
-                Category = node["category"] != null
-                        ? node["category"].InnerText : "No Category Found";
-            }
-
         }
     }
 }

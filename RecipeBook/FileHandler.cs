@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 
 namespace RecipeBook
@@ -14,14 +15,20 @@ namespace RecipeBook
         public static string AddImageToApp(string location)
         {
             string filename = Path.GetFileName(location);
-            if (Util.IsImageTooLarge(location, 500))
+            try {
+                if (Util.IsImageTooLarge(location, 500))
+                {
+                    Image img = Util.MakeThumbnail(location);
+                    img.Save("images/userimages/" + filename);
+                    Console.WriteLine("7.1");
+                }
+                else
+                {
+                    File.Copy(location, "images /userimages/" + filename);
+                }
+            }catch(Exception e)
             {
-                Image img = Util.MakeThumbnail(location);
-                img.Save("images/userimages/" + filename);
-            }
-            else
-            {
-                File.Copy(location, "images/userimages/" + filename);
+                filename = Constants.Cookbook;
             }
             return filename;
         }

@@ -37,11 +37,10 @@ namespace RecipeBook
         /// A collection of Recipe objects.
         /// </summary>
         private ObservableCollection<Recipe> Recipes {get; set; }
-        private const string WelcomeFile = "WelcomeScreen/welcome.rtf";
         private string _recipeFile = @"xmlData\recipe.rcpbk";
         private FileStream _fs;
         private int _currentId;
-        private string imageFolder = @"/images/userimages/";
+        
         public MainWindow()
         {
             Theme.SetTheme();
@@ -75,7 +74,7 @@ namespace RecipeBook
             InstructionsPrompt.Text = null;
             TitleBox.Document.Blocks.Clear();
             var tr = new TextRange(BodyText.Document.ContentStart, BodyText.Document.ContentEnd);
-            using (_fs = new FileStream(WelcomeFile, FileMode.OpenOrCreate))
+            using (_fs = new FileStream(Constants.WelcomeFile, FileMode.OpenOrCreate))
             {
                 tr.Load(_fs, DataFormats.Rtf);
             }
@@ -122,13 +121,13 @@ namespace RecipeBook
                     rf.AddHyperLink(HyperLabel, loadedRecipe.Source);
                 }
                 string loc = Directory.GetCurrentDirectory();
-                if (File.Exists(loc + imageFolder + loadedRecipe.ImageLocation))
+                if (File.Exists(loc + loadedRecipe.ImageLocation))
                 {
-                    rf.AddImage(Thumbnail, loc + imageFolder + loadedRecipe.ImageLocation);
+                    rf.AddImage(Thumbnail, loc + loadedRecipe.ImageLocation);
                 }
                 else
                 {
-                    rf.AddImage(Thumbnail, loc + imageFolder + "cookbookicon2.ico");
+                    rf.AddImage(Thumbnail, Constants.ImageFolder + "cookbookicon2.ico");
                 }
             }
         }
