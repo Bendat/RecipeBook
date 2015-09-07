@@ -183,8 +183,6 @@ namespace RecipeBook
         }
 
         //Opens a new window to edit the current file.
-        //Known issue: Multiple edit windows can be opened at once, resulting in the creation of
-        //multiple recipes with the same id
         private void EditWindow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var editor = _currentId >= 0 ? new RecipeEditor(_currentId) : new RecipeEditor();
