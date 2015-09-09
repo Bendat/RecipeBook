@@ -72,7 +72,6 @@ namespace RecipeBook
             int width = 500;
             double ratio = (double)image.Height/(double)image.Width;
             int height = (int)(500*ratio);
-            Console.WriteLine(ratio);
             Image thumb = image.GetThumbnailImage(width,height,()=>false, IntPtr.Zero);
             image.Dispose();
             return thumb;
@@ -95,7 +94,6 @@ namespace RecipeBook
         /// <returns>Boolean true if the image is too big, false otherwise</returns>
         public static bool IsImageTooLarge(string location, int maxWidth)
         {
-            Console.WriteLine(location);
             Image img = new Bitmap(location);
             return img.Width > maxWidth;
         }

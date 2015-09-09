@@ -108,7 +108,6 @@ namespace RecipeBook
             if (loadedRecipe != null)
             {
                 _currentId = loadedRecipe.Id;
-                Console.WriteLine(loadedRecipe.Id);
                 RecipeFormatter rf = new RecipeFormatter();
                 rf.AddContent(TitleBox, loadedRecipe.RecipeName, DocumentSection.Title);
                 rf.AddPrompt(InstructionsPrompt, " method", DocumentSection.Prompt, true);

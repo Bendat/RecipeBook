@@ -29,7 +29,6 @@ namespace RecipeBook
                 {
                     Image img = Util.MakeThumbnail(location);
                     img.Save("images/userimages/" + filename);
-                    Console.WriteLine("7.1");
                 }
                 else
                 {

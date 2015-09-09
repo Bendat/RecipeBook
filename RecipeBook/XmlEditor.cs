@@ -97,7 +97,6 @@ namespace RecipeBook
             XmlAttribute idAtt = node.Attributes["id"];
             node.RemoveAll();
             node.Attributes.Append(idAtt);
-            Console.WriteLine(node.Attributes["id"]);
             AddFieldsToNode(node);
             return node;
         }
