@@ -55,8 +55,6 @@ namespace RecipeBook {
         /// <summary>
         /// The image file associated with the recipe
         /// </summary>
-        
-        //unimplemented------------------------------
         public string ImageLocation { get; set; }
         /// <summary>
         /// An set of ingredients needed for the recipe.
@@ -83,7 +81,6 @@ namespace RecipeBook {
         //Converts an XmlNode object into a Recipe object.
         public void CreateRecipe(int id)
         {
-            
             var node = XmlLoader.FindbyId(id);
             if (node.Attributes == null) return;
             if (node.Attributes["cite"] != null)
@@ -121,7 +118,6 @@ namespace RecipeBook {
             {
                 Instructions.Add("No instructions found");
             }
-            Console.WriteLine(ImageLocation);
         }
     }
 }

@@ -15,7 +15,6 @@ namespace RecipeBook
         public static string AddImageToApp(string location)
         {
             string filename;
-            Console.WriteLine(Directory.Exists(Path.GetDirectoryName(location)));
             if (Directory.Exists(Path.GetDirectoryName(location)))
             {
                filename = Path.GetFileName(location);
