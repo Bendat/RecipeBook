@@ -14,7 +14,17 @@ namespace RecipeBook
         /// <returns></returns>
         public static string AddImageToApp(string location)
         {
-            string filename = Path.GetFileName(location);
+            string filename;
+            Console.WriteLine(Directory.Exists(Path.GetDirectoryName(location)));
+            if (Directory.Exists(Path.GetDirectoryName(location)))
+            {
+               filename = Path.GetFileName(location);
+            }
+            else
+            {
+                return Constants.Cookbook;
+            }
+             
             try {
                 if (Util.IsImageTooLarge(location, 500))
                 {
@@ -24,7 +34,7 @@ namespace RecipeBook
                 }
                 else
                 {
-                    File.Copy(location, "images /userimages/" + filename);
+                    File.Copy(location, "images/userimages/" + filename);
                 }
             }catch(Exception e)
             {

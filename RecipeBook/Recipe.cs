@@ -83,6 +83,7 @@ namespace RecipeBook {
         //Converts an XmlNode object into a Recipe object.
         public void CreateRecipe(int id)
         {
+            
             var node = XmlLoader.FindbyId(id);
             if (node.Attributes == null) return;
             if (node.Attributes["cite"] != null)
@@ -96,7 +97,7 @@ namespace RecipeBook {
                 ? node["name"].InnerText.ToLower() : "No Name Found";
 
             ImageLocation = node["image"] != null 
-                ? Constants.ImageFolder + node["image"].InnerText : " ";
+                ? Constants.ImageFolder + node["image"].InnerText : Constants.Cookbook;
 
             if (node["ingredientList"] != null)
             {
@@ -120,6 +121,7 @@ namespace RecipeBook {
             {
                 Instructions.Add("No instructions found");
             }
+            Console.WriteLine(ImageLocation);
         }
     }
 }

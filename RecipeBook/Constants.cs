@@ -18,6 +18,8 @@ namespace RecipeBook
         /// <summary>
         /// The default image recipes fall back to if none is provided.
         /// </summary>
-        public const string Cookbook = ImageFolder + "cookbookicon2.ico";
+        public const string Cookbook = "cookbookicon2.ico";
+
+        public const string CookBookDir = ImageFolder + "cookbookicon2.ico";
     }
 }
