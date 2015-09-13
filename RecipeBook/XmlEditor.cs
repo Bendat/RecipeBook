@@ -60,8 +60,6 @@ namespace RecipeBook
             recipesNode.AppendChild(node);
             Doc.Save(Filename);
         }
-
-        
         /// <summary>
         /// Creates a new node with the data provided to the XmlEditor instance.
         /// </summary>
