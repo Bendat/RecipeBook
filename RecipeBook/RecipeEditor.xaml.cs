@@ -181,8 +181,9 @@ namespace RecipeBook
         {
             parent = Window.GetWindow(this);
             Dictionary<String, Object> data = RetrieveData();
-            XmlEditor xmle = new XmlEditor(data);
-            var newNode = _isEdit ? xmle.EditXmlNode(XmlLoader.FindbyId(_recipeId)) : xmle.MakeNode();
+            XEditor xmle = new XEditor(data);
+            var newNode = _isEdit ? 
+                xmle.EditXmlNode(XmlLoader.FindbyId(_recipeId, true)) : xmle.MakeNode();
             xmle.WriteNodeToFile(newNode);
             parent.Close();
             ((MainWindow)Application.Current.MainWindow).Run();

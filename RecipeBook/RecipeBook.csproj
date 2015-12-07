@@ -163,6 +163,7 @@
     <Compile Include="WindowExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="XEditor.cs" />
     <Compile Include="XmlEditor.cs" />
     <Compile Include="XmlLoader.cs" />
     <Page Include="Fractions.xaml">

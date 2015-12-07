@@ -31,6 +31,7 @@ namespace RecipeBook
         /// A XML document that can be read or written to from within the RecipeBook namespace.
         /// </summary>
         public static readonly XmlDocument Doc = new XmlDocument();
+        public static XDocument XDoc = new XDocument();
         protected static string Filename; 
 
         /// <summary>
@@ -43,11 +44,13 @@ namespace RecipeBook
             if (File.Exists(location))
             {
                 Doc.Load(location);
+                XDoc = XDocument.Load(location);
             } 
             else
             {
                 GenerateNewDocument(location);
                 Doc.Load(location);
+                XDoc = XDocument.Load(location);
             }
         }
         public static XmlNode FindbyId(int providedId)
@@ -56,6 +59,14 @@ namespace RecipeBook
             return recipeNodeList.Cast<XmlNode>()
                 .Where(xmlNode => xmlNode.Attributes != null)
                 .FirstOrDefault(xmlNode => Convert.ToInt32(xmlNode.Attributes["id"].Value)
+                                           == providedId);
+        }
+
+        public static XElement FindbyId(int providedId, bool debug)
+        {
+            var recipeNodeList = XDoc.Descendants("recipe");
+            return recipeNodeList.Where(xmlNode => xmlNode.Attributes() != null)
+                .FirstOrDefault(xmlNode => Convert.ToInt32(xmlNode.Attribute("id").Value)
                                            == providedId);
         }
 
