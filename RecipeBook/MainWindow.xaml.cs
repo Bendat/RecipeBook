@@ -210,6 +210,11 @@ namespace RecipeBook
             };
             window.ShowDialog();
         }
+
+        private void UserLabel_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 #endregion    
     
